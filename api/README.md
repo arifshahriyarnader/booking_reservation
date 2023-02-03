@@ -21,8 +21,12 @@
 
 - MongoDB Model Relations
 
-**Day-5 Taks:- 02/02/2023**
+**Day-5 Tasks:- 02/02/2023**
 
 - Install React App
 * Node MongoDB Count Documents
 - Data Fetch using Custom Hook
+
+**Day-6 Tasks:- 03/02/2023**
+
+- React Fetch Data from Node Express API
