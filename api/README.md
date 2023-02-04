@@ -30,3 +30,8 @@
 **Day-6 Tasks:- 03/02/2023**
 
 - React Fetch Data from Node Express API
+
+**Day-7 Tasks:- 04/02/2023**
+
+- React Search Using a Backend Api
+* React Fetch Using URL Location
