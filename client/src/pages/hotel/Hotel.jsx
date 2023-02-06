@@ -12,9 +12,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import useFetch from "../../hooks/useFetch";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { SearchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
+import Reserve from "../../components/reserve/Reserve";
 
 const Hotel = () => {
   const location= useLocation()
@@ -22,8 +24,11 @@ const Hotel = () => {
   console.log(location);
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const {data, loading, error} = useFetch(`/hotels/find/${id}`)
+  const {user} = useContext(AuthContext)
+  const navigate= useNavigate()
 
   const {dates, options} = useContext(SearchContext)
 
@@ -54,6 +59,14 @@ const Hotel = () => {
     setSlideNumber(newSlideNumber)
   };
 
+  const handleClick = () =>{
+    if(user){
+      setOpenModal(true)
+    }
+    else{
+      navigate("/login")
+    }
+  }
   return (
     <div>
       <Navbar />
@@ -85,7 +98,7 @@ const Hotel = () => {
           </div>
         )}
         <div className="hotelWrapper">
-          <button className="bookNow">Reserve or Book Now!</button>
+          <button onClick={handleClick} className="bookNow">Reserve or Book Now!</button>
           <h1 className="hotelTitle">{data.name}</h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
@@ -95,7 +108,7 @@ const Hotel = () => {
             Excellent location – {data.distance}m from center
           </span>
           <span className="hotelPriceHighlight">
-            Book a stay over ${data.cheapestPrice} at this property and get a free airport taxi
+            Book a stay over {data.cheapestPrice} Taka at this property and get a free airport taxi
           </span>
           <div className="hotelImages">
             {data.photos?.map((photo, i) => (
@@ -123,15 +136,16 @@ const Hotel = () => {
                 excellent location score of 9.8!
               </span>
               <h2>
-                <b>${days * data.cheapestPrice * options.room}</b> ({days})
+                <b>{days * data.cheapestPrice * options.room} Taka</b> ({days})
               </h2>
-              <button>Reserve or Book Now!</button>
+              <button onClick={handleClick}>Reserve or Book Now!</button>
             </div>
           </div>
         </div>
         <MailList />
         <Footer />
       </div>)}
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
     </div>
   );
 };
