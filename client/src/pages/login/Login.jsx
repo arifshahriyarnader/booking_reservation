@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import Navbar from "../../components/navbar/Navbar"
 import "./login.css";
 
 const Login = () => {
@@ -31,6 +32,8 @@ const Login = () => {
     }
     
     return (
+        <>
+        <Navbar />
         <div className="login">
            <div className="lContainer">
             <input type="text" placeholder="Username" id="username" onChange={handleChange} className="lInput" />
@@ -39,6 +42,7 @@ const Login = () => {
             {error && <span>{error.message}</span>}
             </div> 
         </div>
+        </>
     );
 };
 
