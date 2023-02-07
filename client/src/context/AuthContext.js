@@ -32,7 +32,7 @@ const AuthReducer = (state, action) => {
     return {
         user:null,
         loading:false,
-        error:null,
+        error:null
     };
     default:
       return state;
