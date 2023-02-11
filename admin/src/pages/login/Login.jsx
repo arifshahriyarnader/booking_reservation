@@ -36,8 +36,6 @@ const Login = () => {
     }
   };
 
-  console.log(credentials)
-
   return (
     <>
       <div className="login">
