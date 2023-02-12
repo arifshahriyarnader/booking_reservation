@@ -27,6 +27,8 @@ const Datatable = ({columns}) => {
     }
   };
 
+console.log({path, list})
+
  const actionColumn = [
     {
       field: "action",
