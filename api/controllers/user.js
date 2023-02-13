@@ -1,4 +1,8 @@
 import User from '../models/User.js';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+// import Otp from '../models/Otp.js';
+// import nodemailer from "nodemailer";
 
 //update
 export const updateUser= async(req,res,next) =>{
@@ -45,3 +49,76 @@ export const getUsers= async(req,res,next) =>{
         next(err)
     }
 }
+
+//forgot password
+export const forgotPassword = async(req,res) =>{
+    const {email} =req.body;
+    try{
+        const oldUser =await User.findOne({email});
+        if(!oldUser){
+            return res.json({status:"Sorry, User is not Found!"})
+        }
+        const secret=  process.env.JWT + oldUser.password;
+        const token = jwt.sign({email: oldUser.email, id: oldUser._id},secret,{
+            expiresIn: "5m",
+        });
+    const link = `http://localhost:5000/api/users/reset-password/${oldUser._id}/${token}`
+    console.log(link)
+    return res.json({status:"Success", link})
+    }
+    catch(error){
+        return res.json({status: "Error", error})
+    }
+}
+
+//reset password
+
+export const resetPassword = async (req,res) =>{
+    const {id, token} = req.params;
+    console.log(req.params);
+    const oldUser =await User.findOne({_id:id});
+    if(!oldUser){
+        return res.json({status:"Sorry, User is not Found!"})
+    }
+    const secret=  process.env.JWT + oldUser.password;
+    try{
+        const verify = jwt.verify(token, secret);
+        res.render("index", { email: verify.email, status:"Not Verified" })
+    }
+    catch(error){
+        res.send("Not Verified")
+    }   
+}
+
+export const resetAfterPassword = async (req,res) =>{
+    const {id, token} = req.params;
+    const {password} = req.body;
+    const oldUser =await User.findOne({_id:id});
+    if(!oldUser){
+        return res.json({status:"Sorry, User is not Found!"})
+    }
+    const secret=  process.env.JWT + oldUser.password;
+    try{
+        const verify = jwt.verify(token, secret);
+        const encryptedPassword = await bcrypt.hash(password,10)
+        await User.updateOne(
+            {
+                _id: id,
+            },
+            {
+                $set: {
+                    password: encryptedPassword
+                },
+            }
+        );
+        res.json({status: "Congratulations, Your Password is Updated"});
+        res.render("index", { email: verify.email, status:"Verified" })
+    }
+    catch(error){
+        console.log(error)
+        res.send("Something went Wrong")
+    }   
+}
+
+
+

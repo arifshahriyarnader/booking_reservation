@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Document</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="stylesheet" href="css/style.css" /> -->
+       
+        <script>
+            var status = '<%- JSON.stringify(status) %>';
+       if (JSON.parse(status) == "verified") {
+         if (confirm("Do you want to login?")) {
+           window.location.href = "http://localhost:3000/login";
+         }
+       }
+         </script>
+    </head>
+    <body>
+        <h1><%= email%></h1>
+        <div class="reset-password">
+            <div class="form">
+                <form action="" method="post">
+                    <label htmlFor="password">
+                      Password:
+                      <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                      /><br/>
+                    </label>
+                    <label htmlFor="confirmPassword">
+                      Confirm Password:
+                      <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        required
+                      /><br/>
+                    </label>
+                    <button type="submit">Submit</button>
+                  </form>
+            </div>
+        </div>
+    </body>
+</html>
