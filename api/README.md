@@ -44,3 +44,7 @@
 **Day-9 Tasks:- 05/02/2023**
 
 - React Hotel Booking Reservation
+
+**Day-10 Tasks:- 13/02/2023**
+
+- Reset Password using ejs
