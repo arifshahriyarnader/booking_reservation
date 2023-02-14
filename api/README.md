@@ -48,3 +48,8 @@
 **Day-10 Tasks:- 13/02/2023**
 
 - Reset Password using ejs
+
+**Day-11 Tasks:- 14/02/2022**
+
+- React Some pages added
+* Payment Method Implement
