@@ -55,6 +55,27 @@ const Register = () => {
                     onChange={handleChange}
                     className="regInput"
                      />
+                      <input 
+                    type="text" 
+                    placeholder='Country' 
+                    id="country"
+                    onChange={handleChange}
+                    className="regInput"
+                     />
+                      <input 
+                    type="text" 
+                    placeholder='City' 
+                    id="city"
+                    onChange={handleChange}
+                    className="regInput"
+                     />
+                     <input 
+                    type="tel" 
+                    placeholder='Phone' 
+                    id="phone"
+                    onChange={handleChange}
+                    className="regInput"
+                     />
                      <input 
                     type="password" 
                     placeholder='Password' 

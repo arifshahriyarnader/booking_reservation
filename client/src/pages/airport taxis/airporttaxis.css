@@ -1,0 +1,20 @@
+/* airport.css */
+
+.airport-taxis {
+    padding: 20px;
+    background-color: #f5f5f5;
+    text-align: center;
+  }
+  
+  .airport-taxis h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    margin-top:50px;
+  }
+  
+  .airport-taxis p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #666;
+  }
+  

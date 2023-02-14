@@ -9,7 +9,11 @@ import List from "./pages/list/List";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import ForgetPassword from "./pages/forget password/ForgetPassword";
-import ResetPassword from "./pages/reset password/ResetPassword"
+import Flights from "./pages/flights/Flights";
+import CarRentals from "./pages/car rentals/CarRentals";
+import Contact  from "./pages/contact/Contact";
+import AirportTaxis  from "./pages/airport taxis/AirportTaxis";
+
 
 function App() {
   return (
@@ -21,7 +25,11 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/forgot-password" element={<ForgetPassword/>}/>
-        <Route path="/reset-password" element={<ResetPassword/>}/>
+        <Route path="/flights" element={<Flights/>}/>
+        <Route path="/car-rentals" element={<CarRentals/>}/>
+        <Route path="/airport-taxis" element={<AirportTaxis/>}/>
+        <Route path="/contact" element={<Contact/>}/>
+       
       </Routes>
     </BrowserRouter>
   );
