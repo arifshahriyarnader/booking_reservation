@@ -39,8 +39,9 @@ const ReservationArea = ({ location }) => {
     }
 
     try {
-     const {data} = await axios.post("/payments/payment", reservationInfo);
-     window.location.href = data
+     const allData = await axios.post("/payments/payment", reservationInfo);
+     console.log(allData)
+     window.location.href = allData.data.data
     } catch (error) {
       
     }

@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
 
 const PaymentSchema = new mongoose.Schema({
-  username:{
-    type: String,
-    required: true
-  },  
   firstName: {
     type: String,
     required: true,
@@ -29,7 +25,7 @@ const PaymentSchema = new mongoose.Schema({
     type:Number,
     required:true
   },
-  billingAdress: {
+  billingAddress: {
     type: String,
     required: true,
   },
