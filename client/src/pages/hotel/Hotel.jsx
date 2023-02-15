@@ -62,11 +62,15 @@ const Hotel = () => {
   const handleClick = () =>{
     if(user){
       setOpenModal(true)
+      navigate("/reservation", {state: {destination: location.state.destination, user, dates, options, days, data, totalBill: days * data.cheapestPrice * options.room}})
     }
     else{
-      navigate("/login")
+      navigate("/reservation", {state: {destination: location.state.destination, user, dates, options, days, totalBill: days * data.cheapestPrice * options.room}})
     }
   }
+
+  console.log({user, dates, options})
+
   return (
     <div>
       <Navbar />
