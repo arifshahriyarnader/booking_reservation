@@ -7,6 +7,7 @@ import authRoute from './routes/auth.js';
 import hotelsRoute from './routes/hotels.js';
 import roomsRoute from './routes/rooms.js';
 import usersRoute from './routes/users.js';
+import paymentsRoute from './routes/payments.js';
 
 const app=express();
 dotenv.config();
@@ -32,6 +33,7 @@ app.use("/api/auth",authRoute);
 app.use("/api/hotels",hotelsRoute);
 app.use("/api/rooms",roomsRoute);
 app.use("/api/users",usersRoute);
+app.use("/api/payments",paymentsRoute)
 
 app.use((err, req,res,next) =>{
   const errorStatus= err.status || 500
