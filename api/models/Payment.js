@@ -21,6 +21,10 @@ const PaymentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  hotelData:{
+    type:Object,
+    required: true
+  },
   totalBill:{
     type:Number,
     required:true

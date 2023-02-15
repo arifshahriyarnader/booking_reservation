@@ -1,5 +1,6 @@
 import {
   faBed,
+  faBuilding,
   faCalendar,
   faCalendarDays,
   faChild,
@@ -13,6 +14,9 @@ import "./reservationArea.scss";
 import { useState } from "react";
 import aamarpayLogo from "../../img/aamarpay_logo.png";
 import axios from "axios";
+
+
+
 const ReservationArea = ({ location }) => {
   const [info, setInfo] = useState({});
 
@@ -25,6 +29,7 @@ const ReservationArea = ({ location }) => {
     const reservationInfo = {
       ...info,
       destination: location.state.destination,
+      hotelData: location.state.data,
       dates: location.state.dates[0],
       adult: parseInt(location.state.options.adult),
       children: parseInt(location.state.options.children),
@@ -34,14 +39,15 @@ const ReservationArea = ({ location }) => {
     }
 
     try {
-      await axios.post("/payments/payment", reservationInfo)
+     const {data} = await axios.post("/payments/payment", reservationInfo);
+     window.location.href = data
     } catch (error) {
       
     }
     
   };
 
-  console.log(location);
+  //console.log(location);
   return (
     <div className="container d-flex align-items-center justify-content-around">
       {" "}
@@ -49,11 +55,15 @@ const ReservationArea = ({ location }) => {
         <div className="newContainer">
           <div className="top ">
             <div className="d-flex align-items-center justify-content-around">
-              <div className="d-flex text-secondary mx-5">
-                <FontAwesomeIcon icon={faPlane} className="me-2 mt-1" />
+              <div className="d-flex text-secondary mx-2">
+                <FontAwesomeIcon icon={faPlane} className="me-2 ms-4 mt-1" />
                 <span>{location.state.destination}</span>
               </div>
-              <div className="d-flex mx-5 text-secondary">
+              <div className="d-flex text-secondary mx-2">
+                <FontAwesomeIcon icon={faBuilding} className="me-2 mt-1" />
+                <span>{location.state.data.name}, {location.state.data.address}.</span>
+              </div>
+              <div className="d-flex mx-2 text-secondary">
                 <FontAwesomeIcon icon={faCalendarDays} className="me-2 mt-1" />
                 <span>{`From ${format(
                   location.state.dates[0].startDate,
@@ -63,7 +73,7 @@ const ReservationArea = ({ location }) => {
                   "MM/dd/yyyy"
                 )}`}</span>
               </div>
-              <div className="mx-5 text-secondary">
+              <div className="mx-2 text-secondary">
                 <span>
                   {" "}
                   <FontAwesomeIcon icon={faPerson} className="me-2 mt-1" />
@@ -74,11 +84,11 @@ const ReservationArea = ({ location }) => {
                   {location.state.options.room}
                 </span>
               </div>
-              <div className="d-flex mx-5 text-secondary">
+              <div className="d-flex mx-2 text-secondary">
                 <FontAwesomeIcon icon={faCalendar} className="me-2 mt-1" />
                 <span>{location.state.days} Nights</span>
               </div>
-              <div className="d-flex text-secondary mx-5">
+              <div className="d-flex text-secondary mx-2">
                 <FontAwesomeIcon icon={faMoneyBill} className="me-2 mt-1" />
                 <span>{location.state.totalBill}</span>
               </div>
