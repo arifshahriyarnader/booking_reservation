@@ -98,7 +98,7 @@ const handleClick =() =>{
           <div className="listResult">
             {loading ? "loading" : <>
             {data.map((item) =>(
-              <SearchItem item={item} key={item._id} />
+              <SearchItem item={item} destination={destination} key={item._id} />
             ))}
             </>}
           </div>
