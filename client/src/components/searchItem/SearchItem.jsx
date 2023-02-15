@@ -37,7 +37,7 @@ const SearchItem = ({item,destination}) => {
           <button>{item.rating}</button>
         </div>}
         <div className="siDetailTexts">
-          <span className="siPrice">${item.cheapestPrice}</span>
+          <span className="siPrice">{item.cheapestPrice}</span>
           <span className="siTaxOp">Includes taxes and fees</span>
       
           <button onClick={handleClick} className="siCheckButton">See availability</button>

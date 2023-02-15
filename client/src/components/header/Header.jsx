@@ -13,7 +13,7 @@ import { useState } from "react";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useContext } from "react";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
@@ -62,26 +62,26 @@ const Header = ({ type }) => {
         }
       >
         <div className="headerList">
-          <div className="headerListItem active">
+          <Link to="/stays" className="headerListItem active">
             <FontAwesomeIcon icon={faBed} />
             <span>Stays</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faPlane} />
-            <span>Flights</span>
-          </div>
-          <div className="headerListItem">
+          </Link>
+          <Link to="/flights" className="headerListItem">
+          <FontAwesomeIcon icon={faPlane} />
+           <span>Flights</span>
+          </Link>
+          <Link to="/car-rentals" className="headerListItem">
             <FontAwesomeIcon icon={faCar} />
             <span>Car rentals</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faBed} />
-            <span>Attractions</span>
-          </div>
-          <div className="headerListItem">
+          </Link>
+          <Link to="/airport-taxis" className="headerListItem">
             <FontAwesomeIcon icon={faTaxi} />
             <span>Airport taxis</span>
-          </div>
+          </Link>
+          <Link to="/contact" className="headerListItem">
+            <FontAwesomeIcon icon={faBed} />
+            <span>Contact</span>
+          </Link>
         </div>
         {type !== "list" && (
           <>
@@ -90,7 +90,7 @@ const Header = ({ type }) => {
             </h1>
             <p className="headerDesc">
               Get rewarded for your travels – unlock instant savings of 10% or
-              more with a free Lamabooking account
+              more with a free Shohoz Booking account
             </p>
             {!user && <button className="headerBtn">Create an account</button>}
             <div className="headerSearch">

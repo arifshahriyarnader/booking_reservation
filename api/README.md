@@ -44,3 +44,12 @@
 **Day-9 Tasks:- 05/02/2023**
 
 - React Hotel Booking Reservation
+
+**Day-10 Tasks:- 13/02/2023**
+
+- Reset Password using ejs
+
+**Day-11 Tasks:- 14/02/2023**
+
+- React Some pages added
+* Payment Method Implement
