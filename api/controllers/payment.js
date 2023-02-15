@@ -73,7 +73,7 @@ export const callBack= async (req, res, next) => {
       amount,
     });
 
-
+    console.log(req.body)
 
     res.status(200).send()
   }
