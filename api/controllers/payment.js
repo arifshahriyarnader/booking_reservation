@@ -148,13 +148,12 @@ export const callBack = async (req, res, next) => {
       }
     );
 
-    
-    if (response.acknowledged && pay_status==="Successful") {
+    if (response.acknowledged && pay_status === "Successful") {
       console.log(response.acknowledged);
       let baseUrl = "http://localhost:3000";
       let url = "/reservation-confirmed";
       let queryParams = `?cus_name=${cus_name}&tran_id=${bank_txn}&amount=${amount}&payment_option=${card_type}&reservation_no=${opt_a}`;
-      
+
       res.redirect(301, `${baseUrl}${url}/payment_success${queryParams}`);
     }
   } catch (error) {}
