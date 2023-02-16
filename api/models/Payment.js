@@ -52,6 +52,14 @@ const PaymentSchema = new mongoose.Schema({
   nights:{
     type:Number,
     required: true
+  },
+  paymentData:{
+    type:Object,
+    required: false
+  },
+  reservationNo:{
+    type:Number,
+    required:true
   }
 },{timestamps:true});
 

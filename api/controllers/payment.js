@@ -18,6 +18,7 @@ export const createReservation = async (req, res, next) => {
     dates,
     billingAddress,
     hotelData,
+    reservationNo,
   } = req.body;
 
   const newBookingWithPayment = new Payment({
@@ -34,6 +35,7 @@ export const createReservation = async (req, res, next) => {
     dates,
     billingAddress,
     hotelData,
+    reservationNo,
   });
   try {
     const savedBookingWithPayment = await newBookingWithPayment.save();
@@ -43,6 +45,7 @@ export const createReservation = async (req, res, next) => {
       cus_email: email,
       cus_phone: contact,
       amount: totalBill,
+      opt_a: reservationNo,
       tran_id: uuid(),
       signature_key: "dbb74894e82415a2f7ff0ec3a97e4183",
       store_id: "aamarpaytest",
@@ -71,10 +74,12 @@ export const createReservation = async (req, res, next) => {
         errorMessage,
       });
     }
-    console.log(data);
+    //  console.log(savedBookingWithPayment, "saved");
 
-    res.status(200).send({data:data.payment_url, savedData:savedBookingWithPayment});
-    console.log(req.body);
+    res
+      .status(200)
+      .send({ data: data.payment_url, savedData: savedBookingWithPayment });
+    // console.log(data, "data");
   } catch (error) {
     next(error);
   }
@@ -91,19 +96,70 @@ export const callBack = async (req, res, next) => {
     currency,
     pay_time,
     amount,
+    opt_a,
+    card_number,
+    card_holder,
+    pg_txnid,
+    epw_txnid,
+    ip_address,
+    bank_txn,
+    card_type,
+    mer_txnid,
+    store_id,
+    merchant_id,
   } = req.body;
-  res.render("callback", {
-    title: "Payment Status",
-    pay_status,
-    cus_name,
-    cus_phone,
-    cus_email,
-    currency,
-    pay_time,
-    amount,
-  });
 
-  console.log(req.body);
+  // res.render("callback", {
+  //   title: "Payment Status",
+  //   pay_status,
+  //   cus_name,
+  //   cus_phone,
+  //   cus_email,
+  //   currency,
+  //   pay_time,
+  //   amount,
+  //   opt_a,
+  // });
 
-  res.status(200).send();
+  try {
+    const response = await Payment.updateOne(
+      { reservationNo: opt_a },
+      {
+        paymentData: {
+          pay_status,
+          cus_name,
+          cus_phone,
+          cus_email,
+          currency,
+          pay_time,
+          amount,
+          reservationNo: opt_a,
+          card_number,
+          card_holder,
+          pg_txnid,
+          epw_txnid,
+          ip_address,
+          bank_txn,
+          card_type,
+          mer_txnid,
+          store_id,
+          merchant_id,
+        },
+      }
+    );
+
+    
+    if (response.acknowledged && pay_status==="Successful") {
+      console.log(response.acknowledged);
+      let baseUrl = "http://localhost:3000";
+      let url = "/reservation-confirmed";
+      let queryParams = `?cus_name=${cus_name}&tran_id=${bank_txn}&amount=${amount}&payment_option=${card_type}&reservation_no=${opt_a}`;
+      
+      res.redirect(301, `${baseUrl}${url}/payment_success${queryParams}`);
+    }
+  } catch (error) {}
+
+  // console.log(req.body);
+
+  // res.status(200).send();
 };

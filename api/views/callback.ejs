@@ -15,7 +15,7 @@
 
     <title>aamarPay</title>
   </head>
-  <body class="container" style="width: 40%">
+  <body class="container" style="width: 70%">
     <div class="mt-5" style="border: 2px solid">
       <h2 class="text-center mt-3"><%=title %></h2>
       <div class="row p-5">
@@ -32,7 +32,7 @@
             <div class="col-4">
               <label class="float-end">Email:</label>
             </div>
-            <div class="col-6">
+            <div class="col-5">
               <label class="float-start"><%= cus_email %></label>
             </div>
           </div>
@@ -42,6 +42,14 @@
             </div>
             <div class="col-6">
               <label class="float-start"><%= cus_phone %></label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-5">
+              <label class="float-end">Reservation No:</label>
+            </div>
+            <div class="col-5">
+              <label class="float-start"><%= opt_a %></label>
             </div>
           </div>
         </div>
@@ -54,6 +62,7 @@
               <label class="float-start"><%= pay_status %></label>
             </div>
           </div>
+
           <div class="row">
             <div class="col-4">
               <label class="float-end">Amount:</label>
