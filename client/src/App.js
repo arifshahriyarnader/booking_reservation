@@ -9,7 +9,6 @@ import List from "./pages/list/List";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Reservation from "./pages/reservation/Reservation";
-=======
 import ForgetPassword from "./pages/forget password/ForgetPassword";
 import Flights from "./pages/flights/Flights";
 import CarRentals from "./pages/car rentals/CarRentals";
