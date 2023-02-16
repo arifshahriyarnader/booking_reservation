@@ -18,23 +18,21 @@ const ReservationConfirmed = () => {
   const amount = getParameterByName("amount");
   const payment_option = getParameterByName("payment_option");
   const reservation_no = getParameterByName("reservation_no");
-  console.log(
-    "email: " + user.email,
-    "cus_name: " + cus_name,
-    "tran_id: #" + tran_id,
-    "amount: " + amount,
-    "payment_option " + payment_option
-  );
+  
   return (
     <div>
       <Navbar />
       <Header type="list" />
       <div className="container">
         <div className="mt-5" style={{ border: "2px solid" }}>
-          <h2 className="text-center mt-3">
-            Payment Successful and Reservation Confirmed
-          </h2>
-          <div className="p-5 ">
+          <h4 className="text-center mt-3">
+            <strong>
+              {" "}
+              Payment successful and reservation confirmed please check your
+              email 
+            </strong> <span className="text-success">({user.email})</span> 
+          </h4>
+          <div className="p-5">
             {/* <div className="">
               <div className="d-flex align-items-center justify-content-center">
                 <div className="mx-3">
@@ -77,7 +75,7 @@ const ReservationConfirmed = () => {
                 </div>
               </div>
             </div> */}
-            <table class="table">
+            <table className="table text-danger">
               <thead>
                 <tr>
                   <th scope="col">Name</th>
