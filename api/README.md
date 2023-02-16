@@ -52,4 +52,9 @@
 **Day-11 Tasks:- 14/02/2023**
 
 - React Some pages added
-* Payment Method Implement
+* Payment Method Implement using aamarPay - Online Payment Gateway of Bangladesh
+
+**Day-12 Tasks:- 16/-02/2023**
+
+- Bug Fixes Client side and Server Side
+* Contact Form create using Email JS
