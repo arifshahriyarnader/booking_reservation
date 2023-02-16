@@ -26,6 +26,11 @@ const ReservationArea = ({ location }) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    const min = 100000;
+    const max = 999999;
+    const reservationNo = Math.floor(Math.random() * (max - min + 1)) + min;
+    
+   // console.log(reservationNo);
     const reservationInfo = {
       ...info,
       destination: location.state.destination,
@@ -35,12 +40,15 @@ const ReservationArea = ({ location }) => {
       children: parseInt(location.state.options.children),
       room: parseInt(location.state.options.room),
       totalBill: location.state.totalBill,
-      nights:location.state.days 
+      nights:location.state.days, 
+      reservationNo
     }
+
+    console.log(reservationInfo)
 
     try {
      const allData = await axios.post("/payments/payment", reservationInfo);
-     console.log(allData)
+    // console.log(allData)
      window.location.href = allData.data.data
     } catch (error) {
       

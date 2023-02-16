@@ -47,15 +47,15 @@ const Contact = () => {
         <Navbar />
         <Header />
         <div className="contact-container">
-            <h2>Contact Us</h2>
-            <div className="contact-info">
+          <h2>Contact Us</h2>
+          <div className="contact-info">
             <div className="phone">
-            <h3>Phone</h3>
-            <p>123-456-7890</p>
+              <h3>Phone</h3>
+              <p>123-456-7890</p>
             </div>
             <div className="email">
-            <h3>Email</h3>
-            <p>info@example.com</p>
+              <h3>Email</h3>
+              <p>info@example.com</p>
             </div>
             </div>
         {!isSubmitted ? (

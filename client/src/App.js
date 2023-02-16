@@ -14,6 +14,7 @@ import Flights from "./pages/flights/Flights";
 import CarRentals from "./pages/car rentals/CarRentals";
 import Contact  from "./pages/contact/Contact";
 import AirportTaxis  from "./pages/airport taxis/AirportTaxis";
+import ReservationConfirmed from "./pages/reservation-confirmed/ReservationConfirmed";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path="/car-rentals" element={<CarRentals/>}/>
         <Route path="/airport-taxis" element={<AirportTaxis/>}/>
         <Route path="/contact" element={<Contact/>}/>
+        <Route path="/reservation-confirmed/payment_success" element={<ReservationConfirmed/>}/>
       </Routes>
     </BrowserRouter>
   );
