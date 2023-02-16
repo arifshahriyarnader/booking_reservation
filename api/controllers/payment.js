@@ -156,11 +156,11 @@ export const callBack = async (req, res, next) => {
         service: "gmail",
         auth: {
           user: "alnasimul.dev@gmail.com",
-          pass: "hmymspkjjpsvrhgx",
+          pass: process.env.HOST_EMAIL_PASS,
         },
       });
 
-      console.log(process.env.HOST_EMAIL_PASS);
+      //console.log(process.env.HOST_EMAIL_PASS);
 
       // mail options
 
