@@ -58,3 +58,8 @@
 
 - Bug Fixes Client side and Server Side
 * Contact Form create using Email JS
+
+**Day-13 Tasks:- 17/02/2023**
+
+- Bug fixes
+* Images are Uploaded Through the Database
