@@ -92,7 +92,7 @@ const Header = ({ type }) => {
               Get rewarded for your travels – unlock instant savings of 10% or
               more with a free Shohoz Booking account
             </p>
-            {!user && <button className="headerBtn">Create an account</button>}
+            {!user && <Link to="/register"><button className="headerBtn">Create an account</button></Link>}
             <div className="headerSearch">
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faBed} className="headerIcon" />
