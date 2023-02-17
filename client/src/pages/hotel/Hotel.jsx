@@ -22,12 +22,12 @@ import Reserve from "../../components/reserve/Reserve";
 const Hotel = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
-  console.log(location);
+  //console.log(location);
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(true);
 
-  const { data, loading, error } = useFetch(`/hotels/find/${id}`);
+  const { data, loading } = useFetch(`/hotels/find/${id}`);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -62,17 +62,6 @@ const Hotel = () => {
   const handleClick = () => {
     if (user) {
       setOpenModal(true);
-      navigate("/reservation", {
-        state: {
-          destination: location.state.destination,
-          user,
-          dates,
-          options,
-          days,
-          data,
-          totalBill: days * data.cheapestPrice * options.room,
-        },
-      });
     } else {
       navigate("/login");
     }
@@ -165,7 +154,7 @@ console.log({ user, dates, options });
           <Footer />
         </div>
       )}
-      {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={id} location={location} days={days} />}
     </div>
   );
 };
