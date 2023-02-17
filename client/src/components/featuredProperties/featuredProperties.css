@@ -18,6 +18,10 @@
   height: 250px;
   object-fit: cover;
 }
+/* .fpImg {
+  width: 100%;
+  border-radius: 0.25rem;
+} */
 
 .fpName{
   color: #333;

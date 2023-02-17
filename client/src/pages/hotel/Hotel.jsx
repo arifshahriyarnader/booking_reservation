@@ -18,13 +18,14 @@ import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 import Reserve from "../../components/reserve/Reserve";
 
+
 const Hotel = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   console.log(location);
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(true);
 
   const { data, loading, error } = useFetch(`/hotels/find/${id}`);
   const { user } = useContext(AuthContext);
@@ -76,8 +77,8 @@ const Hotel = () => {
       navigate("/login");
     }
   };
-
-  console.log({ user, dates, options });
+console.log(openModal);
+console.log({ user, dates, options });
 
   return (
     <div>

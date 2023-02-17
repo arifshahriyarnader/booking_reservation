@@ -26,12 +26,12 @@ function App() {
         <Route path="/hotels/:id" element={<Hotel/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
-        <Route path="/reservation" element={<Reservation/>}/>
         <Route path="/forgot-password" element={<ForgetPassword/>}/>
         <Route path="/flights" element={<Flights/>}/>
         <Route path="/car-rentals" element={<CarRentals/>}/>
         <Route path="/airport-taxis" element={<AirportTaxis/>}/>
         <Route path="/contact" element={<Contact/>}/>
+        <Route path="/reservation" element={<Reservation/>}/>
         <Route path="/reservation-confirmed/payment_success" element={<ReservationConfirmed/>}/>
       </Routes>
     </BrowserRouter>
