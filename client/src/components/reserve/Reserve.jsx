@@ -3,14 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 import { SearchContext } from "../../context/SearchContext";
 import useFetch from "../../hooks/useFetch";
 import "./reserve.css";
 
-const Reserve = ({setOpen, hotelId}) => {
+const Reserve = ({setOpen, hotelId, location, days}) => {
     const [selectedRooms, setSelectedRooms] = useState([])
-    const {data, loading, error}= useFetch(`/hotels/room/${hotelId}`)
-    const {dates} = useContext(SearchContext)
+    const { data: hotelData } = useFetch(`/hotels/find/${hotelId}`);
+    const {data}= useFetch(`/hotels/room/${hotelId}`)
+    const {user} = useContext(AuthContext)
+    const {dates, options} = useContext(SearchContext)
 
     const getDatesInRange=(startDate,endDate) =>{
         const start = new Date(startDate)
@@ -42,20 +45,32 @@ const Reserve = ({setOpen, hotelId}) => {
     const navigate=useNavigate()
     const handleClick = async() =>{
         try{
-            await Promise.all(
+         await Promise.all(
                 selectedRooms.map((roomId) =>{
                 const res = axios.put(`/rooms/availability/${roomId}`, 
                 {dates:alldates,
                 });
+               // console.log(res.data)
                 return res.data;
             })
             );
-            setOpen(false)
-            navigate("/")
+        //    console.log(test,"test")
+           setOpen(false)
+            navigate("/reservation", {
+                state: {
+                  destination: location.state.destination,
+                  user,
+                  dates,
+                  options,
+                  days,
+                  data: hotelData,
+                  roomData: data,
+                  totalBill: days * hotelData.cheapestPrice * options.room,
+                },
+              });
         }
         catch(err){}
     }
-    console.log(selectedRooms);
     return (
         <div className="reserve">
             <div className="rContainer">
