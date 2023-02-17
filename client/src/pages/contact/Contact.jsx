@@ -1,15 +1,3 @@
-<<<<<<< Updated upstream
-import React from 'react';
-import Footer from '../../components/footer/Footer';
-import Header from '../../components/header/Header';
-import Navbar from '../../components/navbar/Navbar';
-import './contact.css';
-
-const Contact = () => {
-    return (
-        <>
-        <div>
-=======
 import React, { useState, useRef } from "react";
 import Header from "../../components/header/Header";
 import Navbar from "../../components/navbar/Navbar";
@@ -60,7 +48,7 @@ const Contact = () => {
   return (
     <>
       <div>
->>>>>>> Stashed changes
+
         <Navbar />
         <Header />
         <div className="contact-container">
@@ -74,14 +62,6 @@ const Contact = () => {
               <h3>Email</h3>
               <p>info@example.com</p>
             </div>
-<<<<<<< Updated upstream
-            </div>
-            </div>
-            <Footer />
-            </div>
-        </>
-    );
-=======
           </div>
           {!isSubmitted ? (
             <form ref={form} className="contact-form" onSubmit={handleSubmit}>
@@ -148,7 +128,6 @@ const Contact = () => {
       </div>
     </>
   );
->>>>>>> Stashed changes
 };
 
 export default Contact;
