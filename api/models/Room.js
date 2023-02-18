@@ -6,6 +6,10 @@ const RoomSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    roomType:{
+      type:String,
+      required:true
+    },
     price: {
       type: Number,
       required: true,
@@ -19,7 +23,7 @@ const RoomSchema = new mongoose.Schema(
       required: true,
     },
 
-    roomNumbers: [{ number: Number, unavailableDates: { type: [Date] } }],
+    roomNumbers: [{ number: Number, unavailableDates: { type: [Date] }, price: {type: Number, required:true}  }],
   },
   { timestamps: true }
 );

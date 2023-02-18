@@ -18,7 +18,6 @@ import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 import Reserve from "../../components/reserve/Reserve";
 
-
 const Hotel = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
@@ -40,8 +39,13 @@ const Hotel = () => {
     return diffDays;
   }
 
+  const days = dates ? dayDifference(dates[0].endDate, dates[0].startDate) : 0;
+  //const days = dayDifference(dates[0].endDate, dates[0].startDate);
+
+
   //const days = dayDifference(dates[0].endDate, dates[0].startDate);
   const days = dates ? dayDifference(dates[0].endDate, dates[0].startDate) : 0;
+
 
   const handleOpen = (i) => {
     setSlideNumber(i);
@@ -67,8 +71,8 @@ const Hotel = () => {
       navigate("/login");
     }
   };
-console.log(openModal);
-console.log({ user, dates, options });
+  console.log(openModal);
+  console.log({ user, dates, options });
 
   return (
     <div>
@@ -155,7 +159,14 @@ console.log({ user, dates, options });
           <Footer />
         </div>
       )}
-      {openModal && <Reserve setOpen={setOpenModal} hotelId={id} location={location} days={days} />}
+      {openModal && (
+        <Reserve
+          setOpen={setOpenModal}
+          hotelId={id}
+          location={location}
+          days={days}
+        />
+      )}
     </div>
   );
 };
