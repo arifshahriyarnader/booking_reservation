@@ -40,7 +40,8 @@ const Hotel = () => {
     return diffDays;
   }
 
-  const days = dayDifference(dates[0].endDate, dates[0].startDate);
+  //const days = dayDifference(dates[0].endDate, dates[0].startDate);
+  const days = dates ? dayDifference(dates[0].endDate, dates[0].startDate) : 0;
 
   const handleOpen = (i) => {
     setSlideNumber(i);
@@ -142,10 +143,10 @@ console.log({ user, dates, options });
                   Located in the real heart of Krakow, this property has an
                   excellent location score of 9.8!
                 </span>
-                <h2>
+                {/* <h2>
                   <b>{days * data.cheapestPrice * options.room} Taka</b> ({days}
                   )
-                </h2>
+                </h2> */}
                 <button onClick={handleClick}>Reserve or Book Now!</button>
               </div>
             </div>
