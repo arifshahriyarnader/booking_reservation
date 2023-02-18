@@ -8,6 +8,8 @@ export const createReservation = async (req, res, next) => {
   const {
     firstName,
     lastName,
+    rooms,
+    roomData,
     email,
     destination,
     contact,
@@ -22,9 +24,13 @@ export const createReservation = async (req, res, next) => {
     reservationNo,
   } = req.body;
 
+//  console.log(req.body)
+
   const newBookingWithPayment = new Payment({
     firstName,
     lastName,
+    rooms,
+    roomData,
     email,
     destination,
     contact,
@@ -51,7 +57,7 @@ export const createReservation = async (req, res, next) => {
       signature_key: "dbb74894e82415a2f7ff0ec3a97e4183",
       store_id: "aamarpaytest",
       currency: "BDT",
-      desc: { ...hotelData, destination, adult, children, room, nights, dates },
+      desc: { ...hotelData, destination, adult, children, room, nights, dates, rooms },
       cus_add1: billingAddress,
       cus_add2: "",
       cus_city: "Dhaka",

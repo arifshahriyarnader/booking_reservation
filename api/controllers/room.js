@@ -36,6 +36,10 @@ export const updateRoom = async (req, res, next) => {
 };
 //update Room Availability
 export const updateRoomAvailability = async (req, res, next) => {
+  // const id = req.params.id;
+  // const dates = req.body;
+
+  // console.log({id, dates})
   try {
     await Room.updateOne(
       { "roomNumbers._id": req.params.id },
