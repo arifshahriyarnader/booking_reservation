@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 const ReservationConfirmed = () => {
   const { user } = useContext(AuthContext);
   function getParameterByName(name, url = window.location.href) {
-    name = name.replace(/[\[\]]/g, "\\$&");
+    name = name.replace(/[[\]]/g, "\\$&");
     var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
       results = regex.exec(url);
     if (!results) return null;
@@ -33,48 +33,7 @@ const ReservationConfirmed = () => {
             </strong> <span className="text-success">({user.email})</span> 
           </h4>
           <div className="p-5">
-            {/* <div className="">
-              <div className="d-flex align-items-center justify-content-center">
-                <div className="mx-3">
-                  <h5 className="text-center">Name:</h5>
-                </div>
-                <div className="">
-                  <h6 className="">{cus_name}</h6>
-                </div>
-              </div>
-              <div className="d-flex align-items-center justify-content-center">
-                <div className="mx-3">
-                  <h5 className="">Email:</h5>
-                </div>
-                <div className="">
-                  <h6 className="">{user.email}</h6>
-                </div>
-              </div>
-              <div className="d-flex align-items-center justify-content-center">
-                <div className="mx-3">
-                  <h5 className="">Reservation No:</h5>
-                </div>
-                <div className="">
-                  <h6 className="">{reservation_no}</h6>
-                </div>
-              </div>
-              <div className="d-flex align-items-center justify-content-center">
-                <div className="mx-3">
-                  <h5 className="">Paid Amount:</h5>
-                </div>
-                <div className="">
-                  <h6 className="">{amount}</h6>
-                </div>
-              </div>
-              <div className="d-flex align-items-center justify-content-center">
-                <div className="mx-3">
-                  <h5 className="">Payment Option:</h5>
-                </div>
-                <div className="">
-                  <h6 className="">{payment_option}</h6>
-                </div>
-              </div>
-            </div> */}
+            
             <table className="table text-danger">
               <thead>
                 <tr>
