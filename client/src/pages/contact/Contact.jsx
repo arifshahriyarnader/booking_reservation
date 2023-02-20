@@ -51,11 +51,11 @@ const Contact = () => {
           <div className="contact-info">
             <div className="phone">
               <h3>Phone</h3>
-              <p>123-456-7890</p>
+              <p>+8801780875354</p>
             </div>
             <div className="email">
               <h3>Email</h3>
-              <p>info@example.com</p>
+              <p>naderarifshahriyar@gmail.com</p>
             </div>
             </div>
         {!isSubmitted ? (
