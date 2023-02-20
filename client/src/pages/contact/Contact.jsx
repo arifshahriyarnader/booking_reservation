@@ -48,15 +48,9 @@ const Contact = () => {
         <Header />
         <div className="contact-container">
           <h2>Contact Us</h2>
-          <div className="contact-info">
-            <div className="phone">
-              <h3>Phone</h3>
-              <p>+8801780875354</p>
-            </div>
-            <div className="email">
-              <h3>Email</h3>
-              <p>naderarifshahriyar@gmail.com</p>
-            </div>
+          <div className="contact_info">
+           <p>If you have any questions about booking related, 
+            please fill up the contact form, and our team will contact with you</p>
             </div>
         {!isSubmitted ? (
           
