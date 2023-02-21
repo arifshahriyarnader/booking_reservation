@@ -1,7 +1,6 @@
 //import { StatusCodes } from 'http-status-codes'
 import Hotel from "../models/Hotel.js";
 import Room from "../models/Room.js";
-import { ObjectId } from "mongoose";
 //create
 export const createHotel = async (req, res, next) => {
   const newHotel = new Hotel(req.body);
@@ -21,6 +20,7 @@ export const updateHotel = async (req, res, next) => {
       { $set: req.body },
       { new: true }
     );
+    console.log()
     res.status(200).json(updatedHotel);
   } catch (err) {
     next(err);

@@ -1,12 +1,23 @@
-import "./new.scss";
+import "../new/new.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
+import { useEffect } from "react";
 
-const New = ({ inputs, title }) => {
+const Update = ({ inputs, title }) => {
+  const location = useLocation();
+  const id = location.pathname.split("/")[3];
+  const path = location.pathname.split("/")[1];
+  const { data } = useFetch(`/${path}/${id}`);
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
+
+  useEffect(() => {
+    setInfo(data);
+  }, [data]);
 
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -23,19 +34,23 @@ const New = ({ inputs, title }) => {
         data
       );
 
-      const {url} = uploadRes.data;
+      const { url } = uploadRes.data;
 
-      const newUser = {
+      const updateUser = {
         ...info,
-        img: url
-      }
+        img: url,
+      };
 
-      console.log(newUser)
+      console.log(updateUser);
 
-      await axios.post("/auth/register", newUser);
-
+        const res =  await axios.put(`/${path}/${id}`, updateUser);
+        if(res.status === 200){
+            window.location.replace(`/users/${id}`)
+        }
     } catch (err) {}
   };
+
+  console.log(info)
 
   return (
     <div className="new">
@@ -70,15 +85,17 @@ const New = ({ inputs, title }) => {
               </div>
 
               {inputs.map((input) => (
-                <div className="formInput" key={input.id}>
-                  <label>{input.label}</label>
-                  <input
-                    onChange={handleChange}
-                    type={input.type}
-                    placeholder={input.placeholder}
-                    id={input.id}
-                  />
-                </div>
+                (input.id === "password" ? null :  <div className="formInput" key={input.id}>
+                <label>{input.label}</label>
+                <input
+                  onChange={handleChange}
+                  type={input.type}
+                  placeholder={input.placeholder}
+                  id={input.id}
+                  defaultValue={info[input.id]}
+                />
+              </div>)
+               
               ))}
               <button onClick={handleClick}>Send</button>
             </form>
@@ -89,4 +106,4 @@ const New = ({ inputs, title }) => {
   );
 };
 
-export default New;
+export default Update;

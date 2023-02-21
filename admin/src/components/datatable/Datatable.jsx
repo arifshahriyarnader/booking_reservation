@@ -1,35 +1,50 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
-const Datatable = ({columns}) => {
+const Datatable = ({ columns, type }) => {
   const location = useLocation();
+  const navigate = useNavigate();
 
-  const path = location.pathname.split("/")[1]
+  const path = location.pathname.split("/")[1];
+
+  const [search, setSearch] = useState("");
 
   const [list, setList] = useState([]);
 
-  const {data, loading, error} = useFetch(`/${path}`);
+  const { data } = useFetch(`/${path}`);
 
   useEffect(() => {
-    setList(data)
-  },[data])
+    setList(data);
+  }, [data]);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+  useEffect(async () => {
+    const res = await axios.get(`/${path}/search/${search}`);
+    console.log(res);
+    setList(res.data);
+  }, [search]);
 
   const handleDelete = async (id) => {
     try {
       await axios.delete(`/${path}/${id}`);
       setList(list.filter((item) => item._id !== id));
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
 
-console.log({path, list})
+  const handleClick = (id) => {
+    navigate(`/${path}/${id}`);
+  };
 
- const actionColumn = [
+  console.log({ path, list });
+
+  const actionColumn = [
     {
       field: "action",
       headerName: "Action",
@@ -37,9 +52,17 @@ console.log({path, list})
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
-            </Link>
+            {path === "rooms" ? (
+              <></>
+            ) : (
+              <div
+                className="viewButton"
+                onClick={() => handleClick(params.row._id)}
+              >
+                View
+              </div>
+            )}
+
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row._id)}
@@ -52,9 +75,21 @@ console.log({path, list})
     },
   ];
 
+  console.log(search);
 
   return (
     <div className="datatable">
+      {type && (
+        <div className="search mb-4">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="searchInput"
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <SearchOutlinedIcon />
+        </div>
+      )}
       <div className="datatableTitle">
         {path}
         <Link to={`/${path}/new`} className="link">
@@ -68,7 +103,7 @@ console.log({path, list})
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection
-        getRowId={row => row._id}
+        getRowId={(row) => row._id}
       />
     </div>
   );

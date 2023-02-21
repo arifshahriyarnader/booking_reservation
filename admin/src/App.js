@@ -12,6 +12,10 @@ import { AuthContext } from "./context/AuthContext";
 import { hotelColumns, roomColumns, userColumns } from "./datatablesource";
 import NewHotel from "./pages/newHotel/NewHotel";
 import NewRoom from "./pages/newRoom/NewRoom";
+import ReservationsList from "./pages/reservationsList/ReservationsList";
+import UpdateHotel from "./pages/updateHotel/UpdateHotel";
+import Update from "./pages/update/Update";
+//import HotelList from "./pages/hotelList/HotelList";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -46,7 +50,7 @@ function App() {
                 index
                 element={
                   <ProtectedRoute>
-                    <List columns={userColumns} />
+                    <List columns={userColumns} type={"user"} />
                   </ProtectedRoute>
                 }
               />
@@ -63,6 +67,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <New inputs={userInputs} title="Add New User" />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="update/:id"
+                element={
+                  <ProtectedRoute>
+                    <Update inputs={userInputs} title="Update User" />
                   </ProtectedRoute>
                 }
               />
@@ -93,6 +105,14 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+               <Route
+                path="update/:id"
+                element={
+                  <ProtectedRoute>
+                    <UpdateHotel />
+                  </ProtectedRoute>
+                }
+              />
             </Route>
             <Route path="rooms">
               <Route
@@ -117,6 +137,25 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <NewRoom/>
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
+            <Route path="payments">
+              <Route
+                index
+                element={
+                  <ProtectedRoute>
+                    <ReservationsList/>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path=":paymentId"
+                element={
+                  <ProtectedRoute>
+                    {" "}
+                    <Single />{" "}
                   </ProtectedRoute>
                 }
               />
