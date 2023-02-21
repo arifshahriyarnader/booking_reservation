@@ -18,16 +18,15 @@ import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 import Reserve from "../../components/reserve/Reserve";
 
-
 const Hotel = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
-  console.log(location);
+  //console.log(location);
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(true);
 
-  const { data, loading, error } = useFetch(`/hotels/find/${id}`);
+  const { data, loading } = useFetch(`/hotels/find/${id}`);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -40,8 +39,8 @@ const Hotel = () => {
     return diffDays;
   }
 
-  const days = dayDifference(dates[0].endDate, dates[0].startDate);
-
+  const days = dates ? dayDifference(dates[0].endDate, dates[0].startDate) : 0;
+  
   const handleOpen = (i) => {
     setSlideNumber(i);
     setOpen(true);
@@ -62,23 +61,12 @@ const Hotel = () => {
   const handleClick = () => {
     if (user) {
       setOpenModal(true);
-      navigate("/reservation", {
-        state: {
-          destination: location.state.destination,
-          user,
-          dates,
-          options,
-          days,
-          data,
-          totalBill: days * data.cheapestPrice * options.room,
-        },
-      });
     } else {
       navigate("/login");
     }
   };
-console.log(openModal);
-console.log({ user, dates, options });
+  console.log(openModal);
+  console.log({ user, dates, options });
 
   return (
     <div>
@@ -153,10 +141,10 @@ console.log({ user, dates, options });
                   Located in the real heart of Krakow, this property has an
                   excellent location score of 9.8!
                 </span>
-                <h2>
+                {/* <h2>
                   <b>{days * data.cheapestPrice * options.room} Taka</b> ({days}
                   )
-                </h2>
+                </h2> */}
                 <button onClick={handleClick}>Reserve or Book Now!</button>
               </div>
             </div>
@@ -165,7 +153,14 @@ console.log({ user, dates, options });
           <Footer />
         </div>
       )}
-      {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
+      {openModal && (
+        <Reserve
+          setOpen={setOpenModal}
+          hotelId={id}
+          location={location}
+          days={days}
+        />
+      )}
     </div>
   );
 };

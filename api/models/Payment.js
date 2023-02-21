@@ -46,6 +46,14 @@ const PaymentSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    rooms:{
+      type: [String],
+      required: true
+    },
+    roomData:{
+      type:[Object],
+      required:true
+    },
     dates: {
       type: Object,
       required: true,

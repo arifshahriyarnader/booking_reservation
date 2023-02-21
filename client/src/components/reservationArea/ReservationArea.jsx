@@ -15,8 +15,6 @@ import { useState } from "react";
 import aamarpayLogo from "../../img/aamarpay_logo.png";
 import axios from "axios";
 
-
-
 const ReservationArea = ({ location }) => {
   const [info, setInfo] = useState({});
 
@@ -29,34 +27,48 @@ const ReservationArea = ({ location }) => {
     const min = 100000;
     const max = 999999;
     const reservationNo = Math.floor(Math.random() * (max - min + 1)) + min;
-    
-   // console.log(reservationNo);
+
+    let rooms = [];
+    location.state.roomData.forEach((el) => {
+      rooms.push(el.number);
+      // return el.number;
+    });
+
+    // console.log(reservationNo);
     const reservationInfo = {
       ...info,
+      rooms,
       destination: location.state.destination,
       hotelData: location.state.data,
       dates: location.state.dates[0],
       adult: parseInt(location.state.options.adult),
       children: parseInt(location.state.options.children),
-      room: parseInt(location.state.options.room),
+      room: rooms.length,
+      roomData: location.state.roomData,
       totalBill: location.state.totalBill,
-      nights:location.state.days, 
-      reservationNo
-    }
+      nights: location.state.days,
+      reservationNo,
+    };
 
-    console.log(reservationInfo)
+     console.log(reservationInfo);
 
     try {
-     const allData = await axios.post("/payments/payment", reservationInfo);
-    // console.log(allData)
-     window.location.href = allData.data.data
-    } catch (error) {
-      
-    }
-    
-  };
+      await Promise.all(
+        location.state.roomData.map((roomId) => {
+          const res = axios.put(`/rooms/availability/${roomId._id}`, {
+            dates: location.state.alldates,
+          });
+          return res.data;
+        })
+      );
+      const allData = await axios.post("/payments/payment", reservationInfo);
+      // console.log(allData)
+      window.location.href = allData.data.data;
+    } catch (error) {}
+   };
+ // console.log(location.state.alldates, "reservationArea");
 
-  //console.log(location);
+  //  console.log(location);
   return (
     <div className="container d-flex align-items-center justify-content-around">
       {" "}
@@ -70,7 +82,9 @@ const ReservationArea = ({ location }) => {
               </div>
               <div className="d-flex text-secondary mx-2">
                 <FontAwesomeIcon icon={faBuilding} className="me-2 mt-1" />
-                <span>{location.state.data.name}, {location.state.data.address}.</span>
+                <span>
+                  {location.state.data.name}, {location.state.data.address}.
+                </span>
               </div>
               <div className="d-flex mx-2 text-secondary">
                 <FontAwesomeIcon icon={faCalendarDays} className="me-2 mt-1" />
@@ -90,7 +104,7 @@ const ReservationArea = ({ location }) => {
                   <FontAwesomeIcon icon={faChild} /> Children{" "}
                   {location.state.options.children} |{" "}
                   <FontAwesomeIcon icon={faBed} /> Room{" "}
-                  {location.state.options.room}
+                  {location.state.roomData.length}
                 </span>
               </div>
               <div className="d-flex mx-2 text-secondary">
@@ -131,7 +145,6 @@ const ReservationArea = ({ location }) => {
                     onChange={handleChange}
                     type={``}
                     placeholder={``}
-                    defaultValue={location.state.user.email}
                     id={"email"}
                   />
                 </div>
@@ -154,8 +167,16 @@ const ReservationArea = ({ location }) => {
                   />
                 </div>
                 <div>
-                  <img src={aamarpayLogo} width="180" height="70" alt="" className="me-4" />
-                  <button onClick={handleClick}>Confirm and pay with aamarpay</button>
+                  <img
+                    src={aamarpayLogo}
+                    width="180"
+                    height="70"
+                    alt=""
+                    className="me-4"
+                  />
+                  <button onClick={handleClick}>
+                    Confirm and pay with aamarpay
+                  </button>
                 </div>
               </form>
             </div>
