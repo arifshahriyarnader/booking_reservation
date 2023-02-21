@@ -24,7 +24,7 @@ export const createReservation = async (req, res, next) => {
     reservationNo,
   } = req.body;
 
-//  console.log(req.body)
+  //  console.log(req.body)
 
   const newBookingWithPayment = new Payment({
     firstName,
@@ -57,7 +57,16 @@ export const createReservation = async (req, res, next) => {
       signature_key: "dbb74894e82415a2f7ff0ec3a97e4183",
       store_id: "aamarpaytest",
       currency: "BDT",
-      desc: { ...hotelData, destination, adult, children, room, nights, dates, rooms },
+      desc: {
+        ...hotelData,
+        destination,
+        adult,
+        children,
+        room,
+        nights,
+        dates,
+        rooms,
+      },
       cus_add1: billingAddress,
       cus_add2: "",
       cus_city: "Dhaka",
@@ -175,7 +184,7 @@ export const callBack = async (req, res, next) => {
         to: cus_email, // list of receivers
         subject: "Reservation Cofirmation #" + opt_a, // Subject line
         text: "Hello World", // plain text body
-        html: ` 
+        html: `
         <h3>Message</h3>
         <p><strong> Thanks for your reservation from shohoz booking. </strong> &#128071;</p>
         <br>
@@ -211,4 +220,38 @@ export const callBack = async (req, res, next) => {
   // console.log(req.body);
 
   // res.status(200).send();
+};
+
+export const getReservations = async (req, res, next) => {
+  try {
+    const payments = await Payment.find();
+    res.status(200).json(payments);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const updateReservationData = async (req, res, next) => {
+  const id = req.params.id;
+
+  console.log({ id, ...req.body });
+  try {
+    const updatedData = await Payment.updateOne(
+      { _id: id },
+      { $set: req.body }
+    ).catch((error) => {
+      console.log(error);
+    });
+    res.status(200).json(updatedData);
+  } catch (error) {}
+};
+
+export const getDataByContact = async (req, res, next) => {
+  const search = req.params.search;
+  const regex = new RegExp(search, "i");
+  console.log({search, regex})
+  try {
+    const results = await Payment.find({ contact: { $regex: regex } });
+    res.status(200).json(results)
+  } catch (error) {}
 };

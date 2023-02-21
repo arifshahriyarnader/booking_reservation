@@ -9,9 +9,11 @@ import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/AuthContext";
-import { hotelColumns, roomColumns, userColumns } from "./datatablesource";
+import { hotelColumns, reservationColumns, roomColumns, userColumns } from "./datatablesource";
 import NewHotel from "./pages/newHotel/NewHotel";
 import NewRoom from "./pages/newRoom/NewRoom";
+import ReservationsList from "./pages/reservationsList/ReservationsList";
+//import HotelList from "./pages/hotelList/HotelList";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -117,6 +119,25 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <NewRoom/>
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
+            <Route path="payments">
+              <Route
+                index
+                element={
+                  <ProtectedRoute>
+                    <ReservationsList/>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path=":paymentId"
+                element={
+                  <ProtectedRoute>
+                    {" "}
+                    <Single />{" "}
                   </ProtectedRoute>
                 }
               />

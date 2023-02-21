@@ -1,35 +1,38 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
 
-const Datatable = ({columns}) => {
+const Datatable = ({ columns }) => {
   const location = useLocation();
+  const navigate = useNavigate();
 
-  const path = location.pathname.split("/")[1]
+  const path = location.pathname.split("/")[1];
 
   const [list, setList] = useState([]);
 
-  const {data, loading, error} = useFetch(`/${path}`);
+  const { data, loading, error } = useFetch(`/${path}`);
 
   useEffect(() => {
-    setList(data)
-  },[data])
+    setList(data);
+  }, [data]);
 
   const handleDelete = async (id) => {
     try {
       await axios.delete(`/${path}/${id}`);
       setList(list.filter((item) => item._id !== id));
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
 
-console.log({path, list})
+  const handleClick = (id) => {
+    navigate(`/${path}/${id}`);
+  };
 
- const actionColumn = [
+  console.log({ path, list });
+
+  const actionColumn = [
     {
       field: "action",
       headerName: "Action",
@@ -37,9 +40,17 @@ console.log({path, list})
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
-            </Link>
+            {path === "rooms" ? (
+              <></>
+            ) : (
+              <div
+                className="viewButton"
+                onClick={() => handleClick(params.row._id)}
+              >
+                View
+              </div>
+            )}
+
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row._id)}
@@ -51,7 +62,6 @@ console.log({path, list})
       },
     },
   ];
-
 
   return (
     <div className="datatable">
@@ -68,7 +78,7 @@ console.log({path, list})
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection
-        getRowId={row => row._id}
+        getRowId={(row) => row._id}
       />
     </div>
   );
