@@ -1,23 +1,26 @@
-import React, {useEffect, useState} from 'react';
+import { useContext } from "react";
+import Navbar from "../../components/navbar/Navbar";
+import { AuthContext } from "../../context/AuthContext";
+import './profile.css';
 
 const Profile = (props) => {
-    const [user, setUser] = useState([])
-
-    useEffect(() => {
-        console.log(props._id);
-        fetch(`/users/${props._id}`)
-        .then(response => response.json())
-      .then(data =>{
-        console.log(data);
-        setUser(data);
-      })
-      .catch(error => console.error(error));
-    }, [props._id])
+    const { user } = useContext(AuthContext);
+  
     return (
-        <div>
-           <h1>{user.username}</h1> 
-        </div>
+     <>
+     <Navbar />
+         <div className="profile-container">
+      
+      <div className="profile-info">
+        <h1>{user?.username}</h1>
+        <h2>{user?.email}</h2>
+        <p>{user?.country}, {user?.city}</p>
+        <span>{user?.phone}</span>
+      </div>
+    </div>
+     </>
     );
-};
-
-export default Profile;
+  };
+  
+  export default Profile;
+  
