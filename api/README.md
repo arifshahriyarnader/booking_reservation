@@ -63,3 +63,11 @@
 
 - Bug fixes
 * Images are Uploaded Through the Database
+
+**Day-14 Tasks:- 18/02/2023**
+
+- Payment and Reservation related bug fixed
+
+**Day-15 Tasks:- 21/02/2023**
+
+- User Profile Update
