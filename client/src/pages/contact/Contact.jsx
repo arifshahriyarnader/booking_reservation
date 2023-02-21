@@ -53,14 +53,11 @@ const Contact = () => {
         <div className="contact-container">
           <h2>Contact Us</h2>
           <div className="contact-info">
-            <div className="phone">
-              <h3>Phone</h3>
-              <p>123-456-7890</p>
-            </div>
-            <div className="email">
-              <h3>Email</h3>
-              <p>info@example.com</p>
-            </div>
+           <p>If you have any queries about booking reservation, 
+            please fill up the contact form,
+            our team will contact with you
+           </p>
+            
           </div>
           {!isSubmitted ? (
             <form ref={form} className="contact-form" onSubmit={handleSubmit}>

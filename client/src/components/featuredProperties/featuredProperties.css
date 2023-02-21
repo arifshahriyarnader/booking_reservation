@@ -12,7 +12,9 @@
   display: flex;
   flex-direction: column;
 }
-
+.lnk{
+  text-decoration: none;
+}
 .fpImg{
   width: 100%;
   height: 250px;

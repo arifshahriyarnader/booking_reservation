@@ -9,6 +9,7 @@ import "./reserve.css";
 
 const Reserve = ({ setOpen, hotelId, location, days }) => {
   const [selectedRooms, setSelectedRooms] = useState([]);
+  const [openModal, setOpenModal] = useState(true);
   const { data: hotelData } = useFetch(`/hotels/find/${hotelId}`);
   const { data: roomData } = useFetch(`/hotels/room/${hotelId}`);
   const { user } = useContext(AuthContext);
@@ -83,6 +84,11 @@ const Reserve = ({ setOpen, hotelId, location, days }) => {
           },
         });
     } catch (err) {}
+    if (user) {
+      setOpenModal(true);
+    } else {
+      navigate("/login");
+    }
   };
 
   console.log(alldates, "reserve")
