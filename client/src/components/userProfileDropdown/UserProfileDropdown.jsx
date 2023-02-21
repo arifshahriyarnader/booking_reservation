@@ -31,8 +31,8 @@ const UserProfileDropdown = () => {
       </button>
       {user && showMenu && (
   <div className="user-profile-dropdown__menu">
-    <Link to="/profile" className="user-profile-dropdown__link">Profile</Link>
-    <Link to="/settings" className="user-profile-dropdown__link">Settings</Link>
+    <Link to={`/users/${user._id}`} className="user-profile-dropdown__link">Profile</Link>
+    {/* <Link to="/settings" className="user-profile-dropdown__link">Settings</Link> */}
     <Logout onLogout={logout} />
   </div>
 )}

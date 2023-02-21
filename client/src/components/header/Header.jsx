@@ -32,7 +32,6 @@ const Header = ({ type }) => {
   const [options, setOptions] = useState({
     adult: 1,
     children: 0,
-    room: 1,
   });
 
   const navigate = useNavigate();
@@ -62,10 +61,10 @@ const Header = ({ type }) => {
         }
       >
         <div className="headerList">
-          <Link to="/stays" className="headerListItem active">
+          {/* <Link to="/stays" className="headerListItem active">
             <FontAwesomeIcon icon={faBed} />
             <span>Stays</span>
-          </Link>
+          </Link> */}
           <Link to="/flights" className="headerListItem">
           <FontAwesomeIcon icon={faPlane} />
            <span>Flights</span>
@@ -128,7 +127,7 @@ const Header = ({ type }) => {
                 <span
                   onClick={() => setOpenOptions(!openOptions)}
                   className="headerSearchText"
-                >{`${options.adult} adult · ${options.children} children · ${options.room} room`}</span>
+                >{`${options.adult} adult · ${options.children} children`}</span>
                 {openOptions && (
                   <div className="options">
                     <div className="optionItem">
@@ -173,7 +172,7 @@ const Header = ({ type }) => {
                         </button>
                       </div>
                     </div>
-                    <div className="optionItem">
+                    {/* <div className="optionItem">
                       <span className="optionText">Room</span>
                       <div className="optionCounter">
                         <button
@@ -193,7 +192,7 @@ const Header = ({ type }) => {
                           +
                         </button>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 )}
               </div>
