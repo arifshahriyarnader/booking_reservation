@@ -37,6 +37,16 @@ export const getUser = async (req, res, next) => {
   }
 };
 
+export const searchUser = async (req, res, next) => {
+  const search = req.params.search;
+  const regex = new RegExp(search, "i");
+  console.log({search, regex})
+  try {
+    const results = await User.find({ username: { $regex: regex } });
+    res.status(200).json(results)
+  } catch (error) {}
+};
+
 //get all
 export const getUsers = async (req, res, next) => {
   try {

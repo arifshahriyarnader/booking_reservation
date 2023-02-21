@@ -1,3 +1,4 @@
+import axios from "axios";
 import moment from "moment";
 import { useState } from "react";
 import UpdateReservation from "../UpdateReservation/UpdateReservation";
@@ -12,6 +13,13 @@ const SingleList = ({ data }) => {
 
   function closeModal() {
     setIsOpen(false);
+  }
+
+  const handeleDelete = async (id) => {
+    const res =  await axios.delete(`/payments/deleteById/${id}`)
+    if(res.data.acknowledged){
+        window.location.reload()
+    }
   }
   return (
     <>
@@ -58,7 +66,7 @@ const SingleList = ({ data }) => {
               <a className="dropdown-item" href="#" onClick={openModal}>
                 Update
               </a>
-              <a className="dropdown-item" href="#">
+              <a className="dropdown-item" href="#" onClick={() => handeleDelete(data._id)} >
                 Delete
               </a>
             </div>

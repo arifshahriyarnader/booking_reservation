@@ -23,9 +23,11 @@ const ReservationsList = () => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
-    const res = await axios.get(`/payments/getDataByContact/${searchTerm}`);
-    console.log(res)
-    setList(res.data);
+    if(searchTerm){
+      const res = await axios.get(`/payments/getDataByContact/${searchTerm}`);
+      console.log(res)
+      setList(res.data);
+    }
   }, [searchTerm]);
 
   console.log(list);

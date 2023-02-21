@@ -1,5 +1,5 @@
 import express from 'express';
-import { deleteUser, forgotPassword, getUser, getUsers, resetAfterPassword, resetPassword, updateUser } from '../controllers/user.js';
+import { deleteUser, forgotPassword, getUser, getUsers, resetAfterPassword, resetPassword, searchUser, updateUser } from '../controllers/user.js';
 import { verifyAdmin, verifyToken, verifyUser } from '../utils/verifyToken.js';
 const router=express.Router();
 
@@ -22,6 +22,7 @@ router.delete("/:id", verifyUser, deleteUser);
 
 //GET
 router.get("/:id", verifyUser, getUser);
+router.get("/search/:search", verifyUser, searchUser);
 
 //GET ALL
 router.get("/", verifyAdmin, getUsers);

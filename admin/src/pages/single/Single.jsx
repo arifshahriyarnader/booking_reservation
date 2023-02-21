@@ -1,27 +1,34 @@
 import "./single.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
 //import List from "../../components/table/Table";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
+import { Link } from "react-router-dom";
 
 const Single = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const path = location.pathname.split("/")[1];
   const { data } = useFetch(`/${path}/${id}`);
+  const navigate = useNavigate();
 
-  console.log({ data, path, id });
+  const handleUpdateHotel = () => {
+    navigate(`/${path}/update/${data._id}`)
+  }
+
+  const handleUpdateUser = () => {
+    navigate(`/${path}/update/${data._id}`)
+  }
 
   if (path === "users") {
     return (
       <div className="single">
         <Sidebar />
         <div className="singleContainer">
-          <Navbar />
           <div className="container w-50 top">
             <div className="left">
-              <div className="editButton">Edit</div>
+              <div className="editButton" onClick={handleUpdateUser}>Edit</div>
+
               <h1 className="title">Information</h1>
               <div className="item d-flex align-items-center justify-content-center">
                 <div>
@@ -64,7 +71,9 @@ const Single = () => {
         <div className="singleContainer">
           <div className="container w-50 top">
             <div className="left">
-              <div className="editButton">Edit</div>
+              <Link to={`/${path}/update/${data._id}`}>
+                <div className="editButton" onClick={handleUpdateHotel}>Edit</div>
+              </Link>
               <div className="item d-flex align-items-center justify-content-center">
                 <div>
                   {" "}
@@ -78,12 +87,15 @@ const Single = () => {
                       <h1 className="itemTitle mx-3 mb-3">{data.name}</h1>{" "}
                     </div>
 
-                    {data.rating && (
+                    {/* {data.rating && (
                       <div className="siRating ms-3 my-4">
-                        <span className="text-success"> <strong>Excellent</strong> </span>
+                        <span className="text-success">
+                          {" "}
+                          <strong>Excellent</strong>{" "}
+                        </span>
                         <button>{data.rating}</button>
                       </div>
-                    )}
+                    )} */}
                   </div>
                   <div className="detailItem d-flex align-items-center">
                     <h4 className="itemKey mx-3">Type:</h4>
@@ -99,14 +111,24 @@ const Single = () => {
                     <h4 className="itemKey mx-3">Country:</h4>
                     <h5 className="itemValue">Bangladesh</h5>
                   </div>
-                 { data.featured && <div className="detailItem d-flex align-items-center  mx-3">
-                  <div className="bg-primary w-25 rounded p-2 me-2">
-                  <span className="text-white"> <strong>Featured</strong> </span>
-                  </div>
-                  <div className="bg-success w-75 rounded p-2 text-center mx-5">
-                  <span className="text-white"> <strong>Cheapest Price: {data.cheapestPrice}</strong> </span>
-                  </div>
-                  </div>}
+                  {data.featured && (
+                    <div className="detailItem d-flex align-items-center  mx-3">
+                      <div className="bg-primary w-25 rounded p-2 me-2">
+                        <span className="text-white">
+                          {" "}
+                          <strong>Featured</strong>{" "}
+                        </span>
+                      </div>
+                      <div className="bg-success w-75 rounded p-2 text-center mx-5">
+                        <span className="text-white">
+                          {" "}
+                          <strong>
+                            Cheapest Price: {data.cheapestPrice}
+                          </strong>{" "}
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

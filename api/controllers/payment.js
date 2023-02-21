@@ -255,3 +255,15 @@ export const getDataByContact = async (req, res, next) => {
     res.status(200).json(results)
   } catch (error) {}
 };
+
+export const deleteById = async (req, res, next) => {
+  const id = req.params.id;
+
+  console.log(id)
+
+  try {
+    const results = await Payment.deleteOne({_id: id});
+    res.status(200).json(results)
+    console.log(results)
+  } catch (error) {}
+};
