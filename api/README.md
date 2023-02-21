@@ -66,4 +66,8 @@
 
 **Day-14 Tasks:- 18/02/2023**
 
-- payment and Reservation related bug fixed
+- Payment and Reservation related bug fixed
+
+**Day-15 Tasks:- 21/02/2023**
+
+- User Profile Update
