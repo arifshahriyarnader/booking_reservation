@@ -267,3 +267,14 @@ export const deleteById = async (req, res, next) => {
     console.log(results)
   } catch (error) {}
 };
+
+export const getUserReservations = async(req, res, next) => {
+  const email = req.params.email;
+
+  try {
+    const results = await Payment.find({email})
+    res.status(200).json(results)
+  } catch (error) {
+    
+  }
+}
