@@ -11,7 +11,7 @@ const Profile = () => {
     const { data } = useFetch(`/users/${id}`);
     const {data: reservationData} = useFetch(`/payments/${user.email}`)
 
-    console.log({reservationData, user})
+  //  console.log({reservationData, user})
   
     return (
       <>
