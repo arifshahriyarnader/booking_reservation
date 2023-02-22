@@ -1,5 +1,5 @@
 import "./sidebar.scss";
-import DashboardIcon from "@mui/icons-material/Dashboard";
+//import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
@@ -7,16 +7,20 @@ import HotelIcon from "@mui/icons-material/Hotel";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import Logout from "../logout/Logout";
 // import { DarkModeContext } from "../../context/darkModeContext";
 // import { useContext } from "react";
 
 const Sidebar = () => {
   // const { dispatch } = useContext(DarkModeContext);
+  const {user, logout} = useContext(AuthContext)
   return (
     <div className="sidebar">
       <div className="top">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo">Shohoz Booking Admin Panel</span>
+          <span className="logo">Shohoz Booking Admin Panel ({user.username})</span>
         </Link>
       </div>
       <hr />
@@ -53,13 +57,15 @@ const Sidebar = () => {
             </li>
           </Link>
           <p className="title">USER</p>
+          <Link to="/users/userprofile" style={{ textDecoration: "none" }}>
           <li>
             <AccountCircleOutlinedIcon className="icon" />
             <span>Profile</span>
           </li>
+          </Link>
           <li>
             <ExitToAppIcon className="icon" />
-            <span>Logout</span>
+            <Logout onLogout={logout}/>
           </li>
         </ul>
       </div>

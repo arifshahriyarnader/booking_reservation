@@ -15,6 +15,7 @@ import NewRoom from "./pages/newRoom/NewRoom";
 import ReservationsList from "./pages/reservationsList/ReservationsList";
 import UpdateHotel from "./pages/updateHotel/UpdateHotel";
 import Update from "./pages/update/Update";
+import UserProfile from "./pages/userprofile/UserProfile";
 //import HotelList from "./pages/hotelList/HotelList";
 
 function App() {
@@ -75,6 +76,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <Update inputs={userInputs} title="Update User" />
+                  </ProtectedRoute>
+                }
+              />
+               <Route
+                path="userprofile"
+                element={
+                  <ProtectedRoute>
+                    <UserProfile />
                   </ProtectedRoute>
                 }
               />
