@@ -39,7 +39,7 @@ const Login = () => {
             <input type="text" placeholder="Username" id="username" onChange={handleChange} className="lInput" />
             <input type="password" placeholder="Password" id="password" onChange={handleChange} className="lInput"/>
             <button disabled={loading} onClick={handleClick} className="lButton">Login</button>
-            <Link to="/forgot-password">Forgetten Password?</Link>
+            <Link to="/forgot-password">Forgotten Password?</Link>
             {error && <span>{error.message}</span>}
             </div> 
         </div>

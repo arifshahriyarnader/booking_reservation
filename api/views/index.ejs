@@ -54,7 +54,8 @@
        
         <script>
             var status = '<%- JSON.stringify(status) %>';
-       if (JSON.parse(status) == "verified") {
+            console.log('<%- JSON.stringify(status) %>')
+       if (message === "Congratulations, Your password is updated") {
          if (confirm("Do you want to login?")) {
            window.location.href = "http://localhost:3000/login";
          }
@@ -62,7 +63,6 @@
          </script>
     </head>
     <body>
-        <h1><%= email%></h1>
         <div class="reset-password">
             <div class="form">
                 <form action="" method="post">

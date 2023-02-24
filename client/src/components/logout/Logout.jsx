@@ -1,9 +1,10 @@
 import "./logout.css";
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 import { AuthContext } from "../../context/AuthContext";
 
 const Logout = () => {
     const {user, dispatch} = useContext(AuthContext);
+    //const navigate=useNavigate();
 
     const handleClick =(e) =>{
         e.preventDefault()

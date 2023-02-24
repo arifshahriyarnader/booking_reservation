@@ -6,14 +6,14 @@ import { useContext } from "react";
 import Logout from "../logout/Logout";
 
 const UserProfileDropdown = () => {
-  const { user, logout } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
-
+  
   return (
     <div className="user-profile-dropdown">
       <button onClick={toggleMenu} className="user-profile-dropdown__button">
@@ -32,8 +32,7 @@ const UserProfileDropdown = () => {
       {user && showMenu && (
   <div className="user-profile-dropdown__menu">
     <Link to={`/users/${user._id}`} className="user-profile-dropdown__link">Profile</Link>
-    {/* <Link to="/settings" className="user-profile-dropdown__link">Settings</Link> */}
-    <Logout onLogout={logout} />
+    <Logout />
   </div>
 )}
 

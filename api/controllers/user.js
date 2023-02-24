@@ -1,7 +1,10 @@
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-//import nodemailer from "nodemailer";
+import nodemailer from "nodemailer";
+//import {EMAIL, PASSWORD} from "../env";
+
+
 
 //update
 export const updateUser = async (req, res, next) => {
@@ -71,28 +74,28 @@ export const forgotPassword = async (req, res) => {
     });
     const link = `http://localhost:5000/api/users/reset-password/${oldUser._id}/${token}`;
 
-    // var transporter = nodemailer.createTransport({
-    //     service: 'gmail',
-    //     auth: {
-    //       user: 'youremail@gmail.com',
-    //       pass: 'yourpassword'
-    //     }
-    //   });
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: "naderarifshahriyar@gmail.com",
+    pass: "ixuvbsjaefaocsqk"
+  }
+});
 
-    //   var mailOptions = {
-    //     from: 'youremail@gmail.com',
-    //     to: 'myfriend@yahoo.com',
-    //     subject: 'Shohoz Booking Password Reset',
-    //     text: 'That was easy!'
-    //   };
+var mailOptions = {
+  from: "naderarifshahriyar@gmail.com",
+  to: email,
+  subject: 'Shohoz Booking Reset Password',
+  text: link
+};
 
-    //   transporter.sendMail(mailOptions, function(error, info){
-    //     if (error) {
-    //       console.log(error);
-    //     } else {
-    //       console.log('Email sent: ' + info.response);
-    //     }
-    //   });
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+});
 
     console.log(link);
     return res.json({ status: "Success", link });
@@ -142,7 +145,9 @@ export const resetAfterPassword = async (req, res) => {
       }
     );
     res.json({ status: "Congratulations, Your Password is Updated" });
-    res.render("index", { email: verify.email, status: "Verified" });
+    //res.render("index", { email: verify.email, status: "Verified" });
+    res.redirect('/login');
+
   } catch (error) {
     console.log(error);
     res.send("Something went Wrong");
