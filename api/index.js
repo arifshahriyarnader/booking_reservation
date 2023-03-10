@@ -24,7 +24,9 @@ const connect =async ()  =>{
 mongoose.connection.on("disconnected", () =>{
     console.log("mongoDB disconnected")
 })
-const PORT= process.env.port || 5000;
+
+const PORT= process.env.PORT || 5000;
+
 //middlewares
 app.use(cookieParser());
 app.use(cors());
