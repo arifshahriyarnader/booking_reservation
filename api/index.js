@@ -24,7 +24,7 @@ const connect =async ()  =>{
 mongoose.connection.on("disconnected", () =>{
     console.log("mongoDB disconnected")
 })
-
+const PORT= process.env.port || 5000;
 //middlewares
 app.use(cookieParser());
 app.use(cors());
@@ -49,7 +49,7 @@ app.use((err, req,res,next) =>{
     stack:err.stack,
   })
 })
-app.listen(5000,() =>{
+app.listen(PORT,() =>{
     connect()
     console.log("Connected to backend.!");
 })
