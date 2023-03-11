@@ -51,6 +51,11 @@ app.use((err, req,res,next) =>{
     stack:err.stack,
   })
 })
+//Routes go here
+app.all('*', (req,res) => {
+  res.json({"every thing":"is awesome"})
+})
+
 app.listen(PORT,() =>{
     connect()
     console.log("Connected to backend.!");
