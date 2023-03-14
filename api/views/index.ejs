@@ -55,9 +55,9 @@
         <script>
             var status = '<%- JSON.stringify(status) %>';
             console.log('<%- JSON.stringify(status) %>')
-       if (message === "Congratulations, Your password is updated") {
+       if (status === "Congratulations, Your password is updated") {
          if (confirm("Do you want to login?")) {
-           window.location.href = "http://localhost:3000/login";
+           window.location.href = "/login";
          }
        }
          </script>

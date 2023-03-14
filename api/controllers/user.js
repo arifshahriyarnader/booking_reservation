@@ -6,6 +6,7 @@ import nodemailer from "nodemailer";
 
 
 
+
 //update
 export const updateUser = async (req, res, next) => {
   try {
@@ -97,8 +98,8 @@ transporter.sendMail(mailOptions, function(error, info){
   }
 });
 
-    console.log(link);
-    return res.json({ status: "Success", link });
+    //console.log(link);
+    return res.json({ status: "Please Check Your Email Address", link });
   } catch (error) {
     return res.json({ status: "Error", error });
   }
@@ -108,7 +109,7 @@ transporter.sendMail(mailOptions, function(error, info){
 
 export const resetPassword = async (req, res) => {
   const { id, token } = req.params;
-  console.log(req.params);
+  //console.log(req.params);
   const oldUser = await User.findOne({ _id: id });
   if (!oldUser) {
     return res.json({ status: "Sorry, User is not Found!" });
@@ -144,7 +145,7 @@ export const resetAfterPassword = async (req, res) => {
         },
       }
     );
-    res.json({ status: "Congratulations, Your Password is Updated" });
+    //res.json({ status: "Congratulations, Your Password is Updated" });
     //res.render("index", { email: verify.email, status: "Verified" });
     res.redirect('/login');
 
